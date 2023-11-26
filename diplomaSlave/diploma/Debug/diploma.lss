@@ -1,0 +1,156 @@
+
+diploma.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000cc  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000120  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000120  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000150  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000038  00000000  00000000  0000018c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000006e2  00000000  00000000  000001c4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000612  00000000  00000000  000008a6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000002a8  00000000  00000000  00000eb8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000054  00000000  00000000  00001160  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000320  00000000  00000000  000011b4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000000f0  00000000  00000000  000014d4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000028  00000000  00000000  000015c4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 4e 00 	call	0x9c	; 0x9c <main>
+  64:	0c 94 64 00 	jmp	0xc8	; 0xc8 <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <segment_dis>:
+	}
+	return result;
+}
+void segment_dis(char n)
+{
+	PORTB=n%10;
+  6c:	9d ec       	ldi	r25, 0xCD	; 205
+  6e:	89 9f       	mul	r24, r25
+  70:	91 2d       	mov	r25, r1
+  72:	11 24       	eor	r1, r1
+  74:	29 2f       	mov	r18, r25
+  76:	26 95       	lsr	r18
+  78:	26 95       	lsr	r18
+  7a:	26 95       	lsr	r18
+  7c:	22 0f       	add	r18, r18
+  7e:	32 2f       	mov	r19, r18
+  80:	33 0f       	add	r19, r19
+  82:	33 0f       	add	r19, r19
+  84:	23 0f       	add	r18, r19
+  86:	82 1b       	sub	r24, r18
+  88:	88 bb       	out	0x18, r24	; 24
+	char msb=(n/10)<<4;
+  8a:	96 95       	lsr	r25
+  8c:	96 95       	lsr	r25
+  8e:	96 95       	lsr	r25
+  90:	92 95       	swap	r25
+  92:	90 7f       	andi	r25, 0xF0	; 240
+	PORTB= PORTB | msb;
+  94:	88 b3       	in	r24, 0x18	; 24
+  96:	98 2b       	or	r25, r24
+  98:	98 bb       	out	0x18, r25	; 24
+  9a:	08 95       	ret
+
+0000009c <main>:
+}
+#define WRITE_BIT(reg,pin,value)  (reg=(reg+value*power(2,pin)))
+int main(void)
+{
+    /* Replace with your application code */
+	DDRB =255;
+  9c:	8f ef       	ldi	r24, 0xFF	; 255
+  9e:	87 bb       	out	0x17, r24	; 23
+	DDRC=0;
+  a0:	14 ba       	out	0x14, r1	; 20
+	PORTC=0xff;
+  a2:	85 bb       	out	0x15, r24	; 21
+	//PORTB =0b00000001;
+	//int flag=0;
+	//int flag2=0;
+	//WRITE_BIT(PORTB,4,1);
+	//WRITE_BIT(PORTB,5,0);
+	char x=0;
+  a4:	c0 e0       	ldi	r28, 0x00	; 0
+    while (1) 
+    {
+		segment_dis(x);
+  a6:	8c 2f       	mov	r24, r28
+  a8:	0e 94 36 00 	call	0x6c	; 0x6c <segment_dis>
+		x++;
+  ac:	cf 5f       	subi	r28, 0xFF	; 255
+		if(x==100)
+  ae:	c4 36       	cpi	r28, 0x64	; 100
+  b0:	09 f4       	brne	.+2      	; 0xb4 <main+0x18>
+			x=0;
+  b2:	c0 e0       	ldi	r28, 0x00	; 0
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  b4:	2f ef       	ldi	r18, 0xFF	; 255
+  b6:	81 ee       	ldi	r24, 0xE1	; 225
+  b8:	94 e0       	ldi	r25, 0x04	; 4
+  ba:	21 50       	subi	r18, 0x01	; 1
+  bc:	80 40       	sbci	r24, 0x00	; 0
+  be:	90 40       	sbci	r25, 0x00	; 0
+  c0:	e1 f7       	brne	.-8      	; 0xba <main+0x1e>
+  c2:	00 c0       	rjmp	.+0      	; 0xc4 <main+0x28>
+  c4:	00 00       	nop
+  c6:	ef cf       	rjmp	.-34     	; 0xa6 <main+0xa>
+
+000000c8 <_exit>:
+  c8:	f8 94       	cli
+
+000000ca <__stop_program>:
+  ca:	ff cf       	rjmp	.-2      	; 0xca <__stop_program>
